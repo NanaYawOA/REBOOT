@@ -1,0 +1,3 @@
+Place your dataset clips here. Referenced by index.html:
+  teaser.mp4, usbc_expert.mp4, usbc_recovery.mp4, rj45_expert.mp4, rj45_recovery.mp4
+See ../README.md for guidance on size/format.
