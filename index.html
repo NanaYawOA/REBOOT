@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>REBOOT: From Failure to Recovery — A Dataset and Benchmark for Bi-Manual Precision Assembly</title>
-<meta name="description" content="REBOOT (Recovery Episode Benchmark for Off-nominal Trajectories): the first bi-manual manipulation benchmark designed around failure as a first-class signal. 2,160 demonstrations, 18 precision assembly tasks, paired expert and recovery episodes." />
+<title>REBOOT: From Failure to Recovery: A Dataset and Benchmark for Bi-Manual Precision Assembly</title>
+<meta name="description" content="REBOOT (Recovery Episode Benchmark for Off-nominal Trajectories): a bi-manual manipulation benchmark that treats failure as a first-class signal. 2,160 demonstrations across 18 precision assembly tasks, with paired expert and recovery episodes." />
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:title" content="REBOOT: From Failure to Recovery" />
-<meta property="og:description" content="The first bi-manual manipulation benchmark designed around failure as a first-class signal. 2,160 demos across 18 precision assembly tasks with paired recovery episodes." />
+<meta property="og:description" content="A bi-manual manipulation benchmark that treats failure as a first-class signal. 2,160 demonstrations across 18 precision assembly tasks with paired recovery episodes." />
 <meta property="og:image" content="./images/overview.png" />
 <meta name="twitter:card" content="summary_large_image" />
 
@@ -60,8 +60,8 @@
       <source src="./videos/teaser.mp4" type="video/mp4" />
     </video>
     <figcaption>
-      Each precision-assembly task decomposes into five kinematic phases. Successful execution (left) and
-      failure paired with expert recovery (right) are both treated as first-class supervision.
+      Each precision-assembly task is decomposed into five kinematic phases. REBOOT treats both successful
+      execution (left) and failure paired with expert recovery (right) as first-class supervision signal.
     </figcaption>
   </figure>
 </header>
@@ -80,11 +80,13 @@
 <!-- ============ THE PIPELINE (signature) ============ -->
 <section class="section" id="pipeline">
   <div class="wrap">
-    <span class="section-tag">01 / A five-phase analysis</span>
+    <span class="section-tag">01 / A five-phase decomposition</span>
     <h2>Every task, one pipeline</h2>
     <p class="lead">
-      A single task-agnostic decomposition runs through all 18 tasks. Each phase is annotated with its time-step boundary, so progress can be measured per phase instead of collapsing a whole episode into
-      a binary pass/fail. Hover a phase to see how the same kinematic moment splits into a success lane and a recovery lane.
+      A single task-agnostic decomposition is shared across all 18 tasks. Each trajectory is annotated with
+      the time-step boundaries between consecutive phases, so per-phase completion can be measured rather
+      than collapsing an episode into binary success. Hover a phase to see how the same kinematic stage
+      produces qualitatively different outcomes under success and under failure recovery.
     </p>
 
     <div class="pipeline" role="list">
@@ -94,7 +96,7 @@
         <span class="pdesc">Position both arms to the grasp configuration.</span>
         <div class="lanes">
           <span class="lane ok">grippers align with object center</span>
-          <span class="lane bad">overshoots target · stalls in free space</span>
+          <span class="lane bad">overshoots target, stalls in free space</span>
         </div>
       </div>
       <div class="phase" role="listitem" data-phase="2" tabindex="0">
@@ -103,7 +105,7 @@
         <span class="pdesc">Close the grippers to secure the object.</span>
         <div class="lanes">
           <span class="lane ok">object grasped completely</span>
-          <span class="lane bad">closes on a misaligned pose · misses object</span>
+          <span class="lane bad">closes on a misaligned pose, misses object</span>
         </div>
       </div>
       <div class="phase" role="listitem" data-phase="3" tabindex="0">
@@ -112,7 +114,7 @@
         <span class="pdesc">Move the grasped object to the target location.</span>
         <div class="lanes">
           <span class="lane ok">object moved to goal</span>
-          <span class="lane bad">arm drifts off-axis · object dropped</span>
+          <span class="lane bad">arm drifts off-axis, object dropped</span>
         </div>
       </div>
       <div class="phase" role="listitem" data-phase="4" tabindex="0">
@@ -136,7 +138,7 @@
     </div>
     <p class="legend">
       <span class="legend-item"><span class="swatch ok"></span>success lane</span>
-      <span class="legend-item"><span class="swatch bad"></span>failure → recovery lane</span>
+      <span class="legend-item"><span class="swatch bad"></span>failure recovery lane</span>
     </p>
   </div>
 </section>
@@ -148,26 +150,29 @@
       <span class="section-tag">02 / Why failure is the signal</span>
       <h2>Policies fail in characterizable ways</h2>
       <p>
-        Imitation-learning policies tend to stall at high-uncertainty states, drift during contact-rich alignment,
-        and miss targets by millimetres. Yet demonstration datasets consist almost entirely of clean,
-        successful trajectories, and real-world benchmarks collapse performance into a binary success metric.
+        Imitation-learned policies stall at high-uncertainty states, drift during contact-rich alignment,
+        and miss targets by millimetres. Training datasets, however, consist almost exclusively of clean,
+        successful trajectories, and real-world benchmarks collapse performance into binary success. This
+        leaves policies without supervision for recovery behaviours and researchers without the resolution
+        to localize failure over long horizons.
       </p>
       <p>
-        Consider a USB-A connector with 0.62&nbsp;mm of engagement clearance. A policy trained only on
-        successes has never seen mid-task deviation: arriving with a lateral offset past the port clearance,
-        it drives forward instead of retracting. The housing catches, yaws under contact, and jams
-        irreversibly. What it needed — but was never shown — is a recovery trajectory: retract, re-align,
-        re-approach.
+        The limitation is stark in precision assembly. Consider inserting a USB-A connector with 0.62&nbsp;mm
+        of engagement clearance. A policy trained only on successes has no exposure to mid-task deviation:
+        arriving at alignment with a lateral offset exceeding the port clearance, it drives forward rather
+        than retracting. The housing catches on the port rim, yaws under contact force, and jams
+        irreversibly. What the policy needs, but was never shown, is a recovery trajectory: retract,
+        re-align, re-approach.
       </p>
       <p>
-        REBOOT records that recovery. Half the dataset is expert demonstrations; the other half is
-        recovery-from-failure episodes, sampled to match the failure distribution real policies actually
-        produce.
+        REBOOT records that recovery. Half the dataset consists of expert demonstrations; the other half
+        consists of recovery-from-failure demonstrations, sampled to match the empirical failure
+        distribution of imitation-learned policy rollouts.
       </p>
     </div>
     <figure class="fig">
       <img src="./images/figure1.png" alt="Overview figure: five phases with success and recovery columns" />
-      <figcaption>Successful trajectories (left) and failure→recovery episodes (right) at each phase.</figcaption>
+      <figcaption>Successful trajectories (left) and failure recovery episodes (right) at each phase.</figcaption>
     </figure>
   </div>
 </section>
@@ -175,38 +180,38 @@
 <!-- ============ CONTRIBUTIONS ============ -->
 <section class="section" id="contributions">
   <div class="wrap">
-    <span class="section-tag">03 / What REBOOT contributes</span>
-    <h2>Five things existing datasets don't give you</h2>
+    <span class="section-tag">03 / Contributions</span>
+    <h2>What REBOOT provides</h2>
     <div class="cards">
       <article class="card">
         <span class="cnum">01</span>
         <h3>Paired failure data</h3>
-        <p>2,160 real-robot trajectories: 1,080 expert demos paired 1:1 with 1,080 recovery episodes,
-        each labelled with the phase of failure induction and a categorical failure mode.</p>
+        <p>2,160 bi-manual real-robot trajectories: 1,080 expert demonstrations paired with 1,080 recovery
+        episodes, each annotated with the phase of failure induction and a categorical failure mode.</p>
       </article>
       <article class="card">
         <span class="cnum">02</span>
         <h3>Shared phase decomposition</h3>
-        <p>One five-phase sequence with annotated boundaries across all 18 install/remove tasks, making
-        cross-task failure analysis and recovery transfer tractable.</p>
+        <p>A common five-phase sequence with annotated phase boundaries across all 18 install and remove
+        tasks, enabling cross-task failure analysis and recovery transfer.</p>
       </article>
       <article class="card">
         <span class="cnum">03</span>
         <h3>Mechanical metadata</h3>
-        <p>Every task tagged with rotational symmetry class, engagement-clearance tier, and matched
-        install–remove pairs — so failures attribute to tolerance, not just semantics.</p>
+        <p>Each task is annotated with rotational symmetry class, engagement-clearance tier, and matched
+        install and remove pairs, supporting attribution of failure to mechanical tolerance.</p>
       </article>
       <article class="card">
         <span class="cnum">04</span>
         <h3>Grounded language</h3>
-        <p>Per-phase natural-language outcome descriptions for both success and failure, providing
-        supervision for vision-language recovery policies.</p>
+        <p>Per-phase natural-language outcome descriptions characterizing both success and failure
+        conditions, providing supervision for vision-language recovery policies.</p>
       </article>
       <article class="card">
         <span class="cnum">05</span>
         <h3>Empirical failure profiles</h3>
-        <p>Measured per-phase failure across ACT, Diffusion Policy, and π0-FAST — used to calibrate the
-        expert-to-recovery mix instead of assuming a uniform split.</p>
+        <p>Per-phase failure recorded across ACT, Diffusion Policy, and Pi0-FAST, used to calibrate the
+        expert-to-recovery proportion rather than assuming a uniform mix.</p>
       </article>
     </div>
   </div>
@@ -216,10 +221,12 @@
 <section class="section alt" id="tasks">
   <div class="wrap">
     <span class="section-tag">04 / The task suite</span>
-    <h2>9 objects, 18 tasks, Expert and recovery demonstrations</h2>
+    <h2>9 objects, 18 tasks, expert and recovery demonstrations</h2>
     <p class="lead">
-      Nine manfucaturing relevant objects with a variety of rotational symmetry and engagement tolerance each in an install and a remove variant, for 18 tasks. Our dataset inlcudes Clearances run from an interference-fit RCA (0&nbsp;mm)
-      to a loose HAN&nbsp;10E (2.73&nbsp;mm).
+      The suite is built on NIST Assembly Task Board #1 and comprises nine manufacturing-relevant objects
+      spanning a range of geometric complexity, engagement tolerance, and rotational symmetry. Each object
+      appears in both an install and a remove variant, yielding 18 tasks. Engagement clearances range from
+      an interference-fit RCA connector at 0&nbsp;mm to a loose HAN&nbsp;10E connector at 2.73&nbsp;mm.
     </p>
 
     <div class="table-scroll">
@@ -251,11 +258,12 @@
 <!-- ============ DATASET GALLERY (videos) ============ -->
 <section class="section" id="gallery">
   <div class="wrap">
-    <span class="section-tag">05 / the dataset</span>
+    <span class="section-tag">05 / The dataset</span>
     <h2>Success and recovery, side by side</h2>
     <p class="lead">
-      Synchronized RGB-D from four viewpoints — overhead, front-facing, and one per wrist — recorded at
-      30&nbsp;Hz. Below, expert executions run alongside recovery episodes for the same task.
+      All data are collected with synchronized RGB-D observations from four fixed viewpoints: overhead,
+      front-facing, and one per wrist, recorded at 30&nbsp;Hz. Below, expert executions are shown alongside
+      recovery episodes for the same task.
     </p>
 
     <div class="video-grid">
@@ -264,28 +272,28 @@
         <video autoplay muted loop playsinline poster="./images/vid1.png">
           <source src="./videos/usbc_expert.mp4" type="video/mp4" />
         </video>
-        <figcaption>USB-C install · clean insertion</figcaption>
+        <figcaption>USB-C install, clean insertion</figcaption>
       </figure>
       <figure class="vid">
         <span class="vtag bad">recovery</span>
         <video autoplay muted loop playsinline poster="./images/vid2.png">
           <source src="./videos/usbc_recovery.mp4" type="video/mp4" />
         </video>
-        <figcaption>USB-C install · misalign at place, then re-approach</figcaption>
+        <figcaption>USB-C install, misalignment at place then re-approach</figcaption>
       </figure>
       <figure class="vid">
         <span class="vtag ok">expert</span>
         <video autoplay muted loop playsinline poster="./images/vid3.png">
           <source src="./videos/rj45_expert.mp4" type="video/mp4" />
         </video>
-        <figcaption>RJ45 install · latched seat</figcaption>
+        <figcaption>RJ45 install, latched seat</figcaption>
       </figure>
       <figure class="vid">
         <span class="vtag bad">recovery</span>
         <video autoplay muted loop playsinline poster="./images/vid4.png">
           <source src="./videos/rj45_recovery.mp4" type="video/mp4" />
         </video>
-        <figcaption>RJ45 install · jam mid-insert, retract and re-seat</figcaption>
+        <figcaption>RJ45 install, jam mid-insertion then retract and re-seat</figcaption>
       </figure>
     </div>
   </div>
@@ -294,30 +302,31 @@
 <!-- ============ FINDINGS ============ -->
 <section class="section alt" id="findings">
   <div class="wrap">
-    <span class="section-tag">06 / What per-phase evaluation reveals</span>
-    <h2>Failures binary success can't see</h2>
+    <span class="section-tag">06 / Per-phase evaluation</span>
+    <h2>Failures binary success cannot see</h2>
     <div class="findings">
       <div class="finding">
         <span class="fstat mono">54<span class="pct">%</span></span>
-        <p>of installation-task failures land in <strong>Align(place)</strong> and <strong>Engage(place)</strong>
-        — two of five phases. Transport accounts for just 8%.</p>
+        <p>of installation-task failures occur in <strong>Align(place)</strong> and
+        <strong>Engage(place)</strong>, two of five phases. The Transport phase accounts for 8%.</p>
       </div>
       <div class="finding">
-        <span class="fstat mono">16<span class="pct">%</span> → 56<span class="pct">%</span></span>
-        <p>mean rollout success from <strong>install</strong> to <strong>remove</strong>. Extraction is a
-        free-space pull; insertion couples grasping with sub-millimetre alignment.</p>
+        <span class="fstat mono">16<span class="pct">%</span> &rarr; 56<span class="pct">%</span></span>
+        <p>mean rollout success from <strong>install</strong> to <strong>remove</strong>. Extraction is
+        largely a free-space pull; insertion couples grasping with sub-millimetre alignment.</p>
       </div>
       <div class="finding">
-        <span class="fstat mono">14 · 19 · 22<span class="pct">%</span></span>
+        <span class="fstat mono">14 &middot; 19 &middot; 22<span class="pct">%</span></span>
         <p>Engage-phase failure rates for <strong>Continuous</strong>, <strong>C1</strong>, and
-        <strong>C2</strong> symmetry — keyed connectors must resolve yaw before insertion.</p>
+        <strong>C2</strong> symmetry. Keyed connectors must resolve yaw before insertion.</p>
       </div>
     </div>
     <figure class="fig wide">
       <img src="./images/figure3.png" alt="Distribution of last-completed phase across tasks and policies" />
       <figcaption>
-        Distribution of last-completed phase across the three policy families. Tight, low-symmetry
-        connectors fail earliest; loose, high-symmetry connectors progress further before failing.
+        Distribution of the last-completed phase across the three policy families. Tight, low-symmetry
+        connectors fail earliest in the trajectory; loose, high-symmetry connectors progress further before
+        failing.
       </figcaption>
     </figure>
   </div>
@@ -327,16 +336,16 @@
 <!-- ============ CITATION ============ -->
 <section class="section alt" id="citation">
   <div class="wrap">
-    <span class="section-tag">08 / Citation</span>
+    <span class="section-tag">07 / Citation</span>
     <h2>Cite REBOOT</h2>
     <div class="bibtex">
       <button class="copy" data-target="#bib" aria-label="Copy BibTeX">Copy</button>
       <pre id="bib"><code>@article{oforiampofo2026reboot,
-  title   = {REBOOT: From Failure to Recovery — A Dataset and
+  title   = {REBOOT: From Failure to Recovery: A Dataset and
              Benchmark for Bi-Manual Precision Assembly},
   author  = {Ofori-Ampofo, Nana Yaw Owusu and
              Ebrahimi Kahou, Samira and Thekinen, Joseph},
-  journal = {arxiv preprint},
+  journal = {arXiv preprint},
   year    = {2026},
   url     = {https://nanayawoa.github.io/REBOOT/}
 }</code></pre>
@@ -347,7 +356,7 @@
 <footer class="foot">
   <div class="wrap">
     <p>REBOOT is released under CC-BY-4.0 on <a href="https://huggingface.co/REBOOT26">Hugging Face</a>. Built on the LeRobot framework.</p>
-    <p class="mono muted">University of Calgary · Mila · 2026</p>
+    <p class="mono muted">University of Calgary &middot; Mila &middot; 2026</p>
   </div>
 </footer>
 
