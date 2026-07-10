@@ -146,11 +146,11 @@
   <div class="wrap two-col">
     <div>
       <span class="section-tag">02 / Why failure is the signal</span>
-      <h2>Policies fail in characterizable ways. Training data hides it.</h2>
+      <h2>Policies fail in characterizable ways</h2>
       <p>
-        Imitation-learned policies stall at high-uncertainty states, drift during contact-rich alignment,
+        Imitation-learning policies tend to stall at high-uncertainty states, drift during contact-rich alignment,
         and miss targets by millimetres. Yet demonstration datasets consist almost entirely of clean,
-        successful trajectories, and real-world benchmarks collapse performance into a single success bit.
+        successful trajectories, and real-world benchmarks collapse performance into a binary success metric.
       </p>
       <p>
         Consider a USB-A connector with 0.62&nbsp;mm of engagement clearance. A policy trained only on
@@ -216,10 +216,9 @@
 <section class="section alt" id="tasks">
   <div class="wrap">
     <span class="section-tag">04 / The task suite</span>
-    <h2>NIST Assembly Task Board #1, both directions</h2>
+    <h2>9 objects, 18 tasks, Expert and recovery demonstrations</h2>
     <p class="lead">
-      Nine objects spanning geometric complexity, engagement tolerance, and rotational symmetry — each in
-      an install and a remove variant, for 18 tasks. Clearances run from an interference-fit RCA (0&nbsp;mm)
+      Nine manfucaturing relevant objects with a variety of rotational symmetry and engagement tolerance each in an install and a remove variant, for 18 tasks. Our dataset inlcudes Clearances run from an interference-fit RCA (0&nbsp;mm)
       to a loose HAN&nbsp;10E (2.73&nbsp;mm).
     </p>
 
@@ -230,13 +229,13 @@
         </thead>
         <tbody>
           <tr><td>RCA</td><td>Peg-in-hole</td><td><span class="tag cont">Cont.</span></td><td>Interference</td><td class="r mono">0.00 mm</td></tr>
-          <tr><td>USB-C</td><td>Peg-in-hole</td><td><span class="tag c2">C2</span></td><td>Tight</td><td class="r mono">0.09 mm</td></tr>
-          <tr><td>RJ45</td><td>Peg-in-hole</td><td><span class="tag c1">C1</span></td><td>Tight</td><td class="r mono">0.13 mm</td></tr>
-          <tr><td>16 mm bar</td><td>Peg-in-hole</td><td><span class="tag c2">C2</span></td><td>Moderate</td><td class="r mono">0.20 mm</td></tr>
           <tr><td>16 mm cylinder</td><td>Peg-in-hole</td><td><span class="tag cont">Cont.</span></td><td>Moderate</td><td class="r mono">0.20 mm</td></tr>
-          <tr><td>NEMA 1-15P</td><td>Peg-in-hole</td><td><span class="tag c1">C1</span></td><td>Moderate</td><td class="r mono">0.50 mm</td></tr>
-          <tr><td>USB-A</td><td>Peg-in-hole</td><td><span class="tag c1">C1</span></td><td>Moderate</td><td class="r mono">0.62 mm</td></tr>
           <tr><td>M12 fastener</td><td>Threaded</td><td><span class="tag c2">C2</span></td><td>Moderate</td><td class="r mono">0.70 mm</td></tr>
+          <tr><td>USB-C</td><td>Peg-in-hole</td><td><span class="tag c2">C2</span></td><td>Tight</td><td class="r mono">0.09 mm</td></tr>
+          <tr><td>16 mm bar</td><td>Peg-in-hole</td><td><span class="tag c2">C2</span></td><td>Moderate</td><td class="r mono">0.20 mm</td></tr>
+          <tr><td>NEMA 1-15P</td><td>Peg-in-hole</td><td><span class="tag c1">C1</span></td><td>Moderate</td><td class="r mono">0.50 mm</td></tr>
+          <tr><td>RJ45</td><td>Peg-in-hole</td><td><span class="tag c1">C1</span></td><td>Tight</td><td class="r mono">0.13 mm</td></tr>
+          <tr><td>USB-A</td><td>Peg-in-hole</td><td><span class="tag c1">C1</span></td><td>Moderate</td><td class="r mono">0.62 mm</td></tr>
           <tr><td>HAN 10E</td><td>Peg-in-hole</td><td><span class="tag c1">C1</span></td><td>Loose</td><td class="r mono">2.73 mm</td></tr>
         </tbody>
       </table>
@@ -252,7 +251,7 @@
 <!-- ============ DATASET GALLERY (videos) ============ -->
 <section class="section" id="gallery">
   <div class="wrap">
-    <span class="section-tag">05 / Inside the dataset</span>
+    <span class="section-tag">05 / the dataset</span>
     <h2>Success and recovery, side by side</h2>
     <p class="lead">
       Synchronized RGB-D from four viewpoints — overhead, front-facing, and one per wrist — recorded at
@@ -289,7 +288,6 @@
         <figcaption>RJ45 install · jam mid-insert, retract and re-seat</figcaption>
       </figure>
     </div>
-    <p class="note mono">Replace the placeholder video files in <code>/videos</code> with your recordings — filenames are wired up in the markup.</p>
   </div>
 </section>
 
