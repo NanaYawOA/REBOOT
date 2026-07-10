@@ -48,7 +48,7 @@
 
     <nav class="links" aria-label="Resources">
       <a class="pill" href="#" data-icon="paper">Paper</a>
-      <a class="pill" href="https://huggingface.co/REBOOT26" data-icon="data">Dataset</a>
+      <a class="pill" href="https://huggingface.co/REBOOT26/datasets" data-icon="data">Dataset</a>
       <a class="pill" href="#" data-icon="code">Code</a>
       <a class="pill" href="https://huggingface.co/spaces/lerobot/visualize_dataset" data-icon="viz">Visualizer</a>
     </nav>
@@ -80,13 +80,11 @@
 <!-- ============ THE PIPELINE (signature) ============ -->
 <section class="section" id="pipeline">
   <div class="wrap">
-    <span class="section-tag">01 / The five-phase spine</span>
+    <span class="section-tag">01 / A five-phase analysis</span>
     <h2>Every task, one pipeline</h2>
     <p class="lead">
-      A single task-agnostic decomposition runs through all 18 tasks. Each phase is annotated with its
-      time-step boundary, so progress can be measured per phase instead of collapsing a whole episode into
-      a binary pass/fail. Hover a phase to see how the same kinematic moment splits into a success lane and
-      a recovery lane.
+      A single task-agnostic decomposition runs through all 18 tasks. Each phase is annotated with its time-step boundary, so progress can be measured per phase instead of collapsing a whole episode into
+      a binary pass/fail. Hover a phase to see how the same kinematic moment splits into a success lane and a recovery lane.
     </p>
 
     <div class="pipeline" role="list">
@@ -327,31 +325,6 @@
   </div>
 </section>
 
-<!-- ============ BENCHMARK COMPARISON ============ -->
-<section class="section" id="comparison">
-  <div class="wrap">
-    <span class="section-tag">07 / Where REBOOT sits</span>
-    <h2>The only real-robot dataset with a 50% failure rate and per-phase recovery</h2>
-    <div class="table-scroll">
-      <table class="spec">
-        <thead>
-          <tr><th>Dataset</th><th>Domain</th><th class="r">Demos</th><th class="r">% Failure</th><th>Recovery</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>REFLECT</td><td>Sim+Real</td><td class="r mono">130</td><td class="r mono">100.0%</td><td><span class="no">No</span></td></tr>
-          <tr><td>RoboFAC</td><td>Sim+Real</td><td class="r mono">10,722</td><td class="r mono">88.0%</td><td><span class="no">No</span></td></tr>
-          <tr><td>RaC</td><td>Sim+Real</td><td class="r mono">—</td><td class="r mono">—</td><td><span class="yes">Yes</span></td></tr>
-          <tr><td>DROID</td><td>Real</td><td class="r mono">≈92,000</td><td class="r mono">≈17.4%</td><td><span class="yes">Yes · 3.68%</span></td></tr>
-          <tr><td>REASSEMBLE</td><td>Real</td><td class="r mono">4,551</td><td class="r mono">11.3%</td><td><span class="no">No</span></td></tr>
-          <tr><td>FurnitureBench</td><td>Sim+Real</td><td class="r mono">5,100</td><td class="r mono">0%</td><td><span class="no">No</span></td></tr>
-          <tr><td>RH20T</td><td>Real</td><td class="r mono">≈110,000</td><td class="r mono">≈9.1%</td><td><span class="no">No</span></td></tr>
-          <tr><td>RoboMIND</td><td>Real</td><td class="r mono">112,000</td><td class="r mono">4.5%</td><td><span class="no">No</span></td></tr>
-          <tr class="ours"><td>REBOOT <span class="ours-mark">ours</span></td><td>Real</td><td class="r mono">2,160</td><td class="r mono">50%</td><td><span class="yes">Yes · per-phase</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
 
 <!-- ============ CITATION ============ -->
 <section class="section alt" id="citation">
@@ -365,9 +338,9 @@
              Benchmark for Bi-Manual Precision Assembly},
   author  = {Ofori-Ampofo, Nana Yaw Owusu and
              Ebrahimi Kahou, Samira and Thekinen, Joseph},
-  journal = {Preprint},
+  journal = {arxiv preprint},
   year    = {2026},
-  url     = {https://huggingface.co/REBOOT26}
+  url     = {https://nanayawoa.github.io/REBOOT/}
 }</code></pre>
     </div>
   </div>
