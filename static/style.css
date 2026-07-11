@@ -127,11 +127,13 @@ sup{font-size:.62em}
 
 /* teaser */
 .teaser{margin-top:56px}
-.teaser video{
-  width:100%;display:block;border-radius:14px;
-  border:1px solid var(--line);
-  background:var(--bg-alt);
-  aspect-ratio:16/8;object-fit:cover;
+.teaser img{
+  width:100%;
+  display:block;
+  border-radius:0;      /* borderless / no rounded corners */
+  border:none;
+  background:transparent;
+  height:auto;          /* keep the figure's true proportions, no cropping */
 }
 figcaption{
   margin-top:.9em;color:var(--ink-dim);font-size:.9rem;
