@@ -55,6 +55,10 @@ sup{font-size:.62em}
   mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 20%,transparent 70%);
 }
 
+.fig.full{margin:0 0 40px}
+.fig.full img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line);background:#fff}
+#why p{max-width:70ch}
+
 /* ---------- HERO ---------- */
 .hero{padding:74px 0 0}
 .eyebrow{
