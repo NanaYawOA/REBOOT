@@ -155,9 +155,11 @@
       Training datasets, however, consist almost exclusively of clean, successful trajectories, and real-world benchmarks collapse performance into binary success. 
       This leaves policies without supervision for recovery behaviours and researchers without the resolution to localize failure over long horizons.
     </p>
+    
     <p>
       The limitation is stark in precision assembly. Consider inserting a USB-A connector with 0.62&nbsp;mm of engagement clearance. A policy trained only on successes has no exposure to mid-task deviation: arriving at alignment with a lateral offset exceeding the port clearance, it drives forward rather than retracting. The housing catches on the port rim, yaws under contact force, and jams irreversibly. What the policy needs, but was never shown, is a recovery trajectory: retract, re-align, re-approach.
     </p>
+    
     <p>
       REBOOT records that recovery. Half the dataset consists of expert demonstrations; the other half consists of recovery-from-failure demonstrations, sampled to match the empirical failure distribution of imitation-learned policy rollouts.
     </p>
