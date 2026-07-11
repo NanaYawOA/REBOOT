@@ -141,15 +141,19 @@
 <!-- ============ MOTIVATION ============ -->
 <section class="section alt" id="why">
   <div class="wrap">
+    <span class="section-tag">02 / Why failure is the signal</span>
+    <h2>Policies fail in characterizable ways</h2>
+    
     <figure class="fig full">
       <img src="./images/overview.png" alt="Overview of REBOOT: five phases with successful trajectories and recovery from failure" />
       <figcaption>Successful trajectories (left) and failure recovery episodes (right) at each phase.</figcaption>
     </figure>
 
-    <span class="section-tag">02 / Why failure is the signal</span>
-    <h2>Policies fail in characterizable ways</h2>
+    
     <p>
-      Imitation-learned policies stall at high-uncertainty states, drift during contact-rich alignment, and miss targets by millimetres. Training datasets, however, consist almost exclusively of clean, successful trajectories, and real-world benchmarks collapse performance into binary success. This leaves policies without supervision for recovery behaviours and researchers without the resolution to localize failure over long horizons.
+      Imitation-learned policies stall at high-uncertainty states, drift during contact-rich alignment, and miss targets by millimetres. 
+      Training datasets, however, consist almost exclusively of clean, successful trajectories, and real-world benchmarks collapse performance into binary success. 
+      This leaves policies without supervision for recovery behaviours and researchers without the resolution to localize failure over long horizons.
     </p>
     <p>
       The limitation is stark in precision assembly. Consider inserting a USB-A connector with 0.62&nbsp;mm of engagement clearance. A policy trained only on successes has no exposure to mid-task deviation: arriving at alignment with a lateral offset exceeding the port clearance, it drives forward rather than retracting. The housing catches on the port rim, yaws under contact force, and jams irreversibly. What the policy needs, but was never shown, is a recovery trajectory: retract, re-align, re-approach.
