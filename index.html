@@ -31,7 +31,7 @@
     </div>
 
     <h1 class="title">
-      <span class="title-sub">REBOOT: From Failure to Recovery – A Dataset and Benchmark for Bi-Manual Precision Assembly</span>
+      <span class="title">REBOOT: From Failure to Recovery – A Dataset and Benchmark for Bi-Manual Precision Assembly</span>
     </h1>
 
 
@@ -71,7 +71,6 @@
 <section class="section" id="pipeline">
   <div class="wrap">
     <span class="section-tag">01 / Abstract</span>
-    <h2>One phase structure across all tasks</h2>
     <p class="lead">
     Robot learning policies fail in characterizable ways: they stall at high-uncertainty states, drift during contact-rich alignment, and miss targets by millimetres on precision tasks. Yet training datasets consist almost exclusively of successful demonstrations, and real-world benchmarks typically collapse performance into binary success. This disconnect leaves policies without supervision for recovery behaviours and leaves researchers without the resolution needed to localize and analyze failure over long horizons. 
     We introduce REBOOT (Recovery Episode Benchmark for Off-nominal Trajectories), the first bi-manual robot manipulation benchmark designed around failure as a first-class signal. REBOOT comprises 2,160 demonstrations across 18 precision assembly tasks, each decomposed into a shared five-phase sequence — Align(pick) → Engage(pick) → Transport → Align(place) → Engage(place) — enabling per-phase progress evaluation beyond terminal success. Failures are systematically introduced at each phase and paired with expert recovery trajectories that return the system to a valid continuation state. Each task is annotated with structured metadata encoding mechanical sources of difficulty: mating interfaces are labelled by rotational symmetry class (continuous, C2, or C1), geometric precision tier based on engagement clearance, and assembly direction via matched install–remove pairs. Failure episodes are annotated by phase of occurrence and categorical failure mode (e.g., misalignment, jamming, premature release), enabling fine-grained attribution of failure to kinematic phase and tolerance violation. All data are collected with synchronized RGB-D observations from four fixed camera viewpoints. Each phase is further accompanied by grounded natural-language outcome descriptions characterizing both success and failure conditions (e.g., stalling in free space, misaligned grasp, insertion jamming), providing supervision for vision-language recovery policies. Half the dataset consists of expert demonstrations; the other half consists of recovery-from-failure demonstrations sampled to match the empirical failure distribution of imitation-learned policy rollouts. We benchmark action-chunked transformer, diffusion, and $\pi_0$-FAST policies using per-phase completion rates, revealing architecture-specific failure points invisible under binary evaluation.   </p>
