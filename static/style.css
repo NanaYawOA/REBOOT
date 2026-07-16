@@ -4,11 +4,11 @@
    ============================================================ */
 
 :root{
-  --bg:        #F5F4EF;   /* warm paper */
-  --bg-alt:    #EDEBE3;   /* alt band */
+  --bg:        #FFFFFF;   /* white */
+  --bg-alt:    #F6F7F8;   /* very light grey band */
   --panel:     #FFFFFF;   /* cards / panels */
-  --line:      #D8D5CB;   /* borders */
-  --line-soft: #E4E1D8;   /* faint grid / dividers */
+  --line:      #E3E5E8;   /* borders */
+  --line-soft: #EEF0F2;   /* faint grid / dividers */
   --ink:       #1A1D22;   /* primary text */
   --ink-dim:   #565B63;   /* secondary text */
   --ink-faint: #8A8F97;   /* captions / labels */
